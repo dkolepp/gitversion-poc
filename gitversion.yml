@@ -1,5 +1,6 @@
 # GitVersion v6
 workflow: GitHubFlow/v1
+mode: ContinuousDelivery
 
 strategies:
   - Fallback
@@ -12,23 +13,12 @@ strategies:
 
 # Let regular commit messages drive bumps (works with squash merges)
 commit-message-incrementing: Enabled
+tag-prefix: 'v'
 
 # Map both +semver tokens and Conventional Commit headers
-major-version-bump-message: >
-  (\+semver:\s?(breaking|major))|
-  (^.*!:)|
-  (BREAKING[ -]CHANGE)
-
-minor-version-bump-message: >
-  (\+semver:\s?(feature|minor))|
-  (^feat(\(.+\))?:)
-
-patch-version-bump-message: >
-  (\+semver:\s?(fix|patch))|
-  (^fix(\(.+\))?:)|
-  (^perf(\(.+\))?:)|
-  (^refactor(\(.+\))?:)|
-  (^chore(\(.+\))?:)
+major-version-bump-message: "(\\+semver:\\s?(breaking|major))|(^.*!:)|(\\bBREAKING[ -]CHANGE\\b)"
+minor-version-bump-message: "(\\+semver:\\s?(feature|minor))|(^feat(\\(.+\\))?:)"
+patch-version-bump-message: "(\\+semver:\\s?(fix|patch))|(^fix(\\(.+\\))?:)|(^perf(\\(.+\\))?:)|(^refactor(\\(.+\\))?:)|(^chore(\\(.+\\))?:)|(^docs(\\(.+\\))?:)|(^style(\\(.+\\))?:)|(^build(\\(.+\\))?:)|(^ci(\\(.+\\))?:)|(^test(\\(.+\\))?:)|(^revert: )"
 
 # Optional: skip increment on commits explicitly marked as none/skip
 no-bump-message: '\+semver:\s?(none|skip)'
